@@ -12,10 +12,23 @@ public class DaoGeneric<E> {
 		EntityTransaction transacao = entityManager.getTransaction();
 		transacao.begin();
 		entityManager.persist(entidade);
-		transacao.commit();
-		
-		
+		transacao.commit();				
 		
 	}
+	
+	public E pesquisar(E entidade) {
+		Object id = HibernateUtil.getPrimaryKey(entidade);
+		
+		E e = (E) entityManager.find(entidade.getClass(), id);
+		
+		return e;
+	}	
+
+	public E pesquisar2(Long id, Class<E> entidade) {
+		
+		E e = (E) entityManager.find(entidade, id);
+		
+		return e;
+	}		
 
 }
