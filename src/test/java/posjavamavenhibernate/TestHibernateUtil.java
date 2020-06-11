@@ -1,5 +1,7 @@
 package posjavamavenhibernate;
 
+import java.util.List;
+
 import org.junit.Test;
 
 import dao.DaoGeneric;
@@ -60,7 +62,7 @@ public class TestHibernateUtil {
 		System.out.println("Atualizado: "+pessoa);		
 	}
 	
-	@Test
+
 	public void testDeletarPorId() {
 		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
 		
@@ -69,5 +71,14 @@ public class TestHibernateUtil {
 		System.out.println("Deletado: "+pessoa);
 	}	
 
+	@Test
+	public void testLista() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		
+		List<UsuarioPessoa> lista = daoGeneric.listar(UsuarioPessoa.class);
+		for (UsuarioPessoa usuarioPessoa : lista) {
+			System.out.println(usuarioPessoa);
+		}	
+	}
 
 }
