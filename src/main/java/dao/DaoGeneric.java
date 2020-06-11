@@ -12,9 +12,17 @@ public class DaoGeneric<E> {
 		EntityTransaction transacao = entityManager.getTransaction();
 		transacao.begin();
 		entityManager.persist(entidade);
-		transacao.commit();				
-		
+		transacao.commit();						
 	}
+	
+	public E updateMerge(E entidade) {
+		EntityTransaction transacao = entityManager.getTransaction();
+		transacao.begin();
+		entityManager.merge(entidade);
+		transacao.commit();	
+		
+		return entidade;
+	}	
 	
 	public E pesquisar(E entidade) {
 		Object id = HibernateUtil.getPrimaryKey(entidade);
