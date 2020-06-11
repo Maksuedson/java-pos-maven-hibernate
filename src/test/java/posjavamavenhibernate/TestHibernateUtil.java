@@ -8,23 +8,25 @@ import model.UsuarioPessoa;
 public class TestHibernateUtil {
 	
 
+	
 	public void testHibernateUtil() {
 		//HibernateUtil.getEntityManager();
 		
 		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
 		UsuarioPessoa pessoa = new UsuarioPessoa();
 		
-		pessoa.setLogin("Teste");
-		pessoa.setNome("Roberto");
+		pessoa.setLogin("Teste2");
+		pessoa.setNome("Roberto2");
 		pessoa.setSobrenome("da Silva");
-		pessoa.setEmail("roberto@gmail.com");
+		pessoa.setEmail("roberto2@gmail.com");
 		pessoa.setSenha("123");
 		
 		daoGeneric.salvar(pessoa);
+		System.out.println("Salvo"+pessoa);
 	}
 	
 
-	@Test
+	
 	public void testBuscar() {
 		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
 		UsuarioPessoa pessoa = new UsuarioPessoa();
@@ -57,6 +59,15 @@ public class TestHibernateUtil {
 		daoGeneric.updateMerge(pessoa);
 		System.out.println("Atualizado: "+pessoa);		
 	}
+	
+	@Test
+	public void testDeletarPorId() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		
+		UsuarioPessoa pessoa = daoGeneric.pesquisar2(5L, UsuarioPessoa.class);
+		daoGeneric.deletarPorId(pessoa);
+		System.out.println("Deletado: "+pessoa);
+	}	
 
 
 }

@@ -32,11 +32,19 @@ public class DaoGeneric<E> {
 		return e;
 	}	
 
-	public E pesquisar2(Long id, Class<E> entidade) {
-		
-		E e = (E) entityManager.find(entidade, id);
-		
+	public E pesquisar2(Long id, Class<E> entidade) {		
+		E e = (E) entityManager.find(entidade, id);		
 		return e;
-	}		
+	}
+	
+	public void deletarPorId(E entidade) {
+		Object id = HibernateUtil.getPrimaryKey(entidade);
+		
+		EntityTransaction transacao = entityManager.getTransaction();
+		transacao.begin();
+		
+		entityManager.createNativeQuery("delete from "+ entidade.getClass().getSimpleName().toLowerCase()+" where id ="+id).executeUpdate();
+		transacao.commit();
+	}
 
 }
