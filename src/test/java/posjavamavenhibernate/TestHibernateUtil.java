@@ -73,11 +73,22 @@ public class TestHibernateUtil {
 		}
 	}
 
-	@Test
 	public void testQueryList() {
 		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
 		List<UsuarioPessoa> list = daoGeneric.getEntityManager().createQuery(" from UsuarioPessoa").getResultList();
-		
+
+		for (UsuarioPessoa usuarioPessoa : list) {
+			System.out.println(usuarioPessoa);
+		}
+	}
+
+	@Test
+	public void testQueryListMaxResult() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		List<UsuarioPessoa> list = daoGeneric.getEntityManager().createQuery(" from UsuarioPessoa order by nome")
+				.setMaxResults(10)
+				.getResultList();
+
 		for (UsuarioPessoa usuarioPessoa : list) {
 			System.out.println(usuarioPessoa);
 		}
