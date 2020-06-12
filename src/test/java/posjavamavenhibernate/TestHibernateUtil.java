@@ -94,16 +94,30 @@ public class TestHibernateUtil {
 		}
 	}
 	
-	@Test
+	
 	public void testQueryistParameter() {
 		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
 		List<UsuarioPessoa> list = daoGeneric.getEntityManager().createQuery(" from UsuarioPessoa where nome = :nome")
 				.setParameter("nome", "Jose").getResultList();
 		for (UsuarioPessoa usuarioPessoa : list) {
 			System.out.println(usuarioPessoa);
-		}
-		
-		
+		}				
 	}
+	
+	
+	public void testQuerySomaId() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		
+		Long somaId = (Long) daoGeneric.getEntityManager().createQuery("select sum(u.id) from UsuarioPessoa u").getSingleResult();
+		System.out.println(somaId);
+	}
+	
+	@Test
+	public void testQueryMediaId() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		
+		Double somaId = (Double) daoGeneric.getEntityManager().createQuery("select avg(u.id) from UsuarioPessoa u").getSingleResult();
+		System.out.println(somaId);
+	}	
 
 }
