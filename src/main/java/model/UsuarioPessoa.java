@@ -3,11 +3,9 @@ package model;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -28,7 +26,7 @@ public class UsuarioPessoa {
 	private String login;
 	private String senha;
 	
-	@OneToMany (mappedBy = "UsuarioPessoa")
+	@OneToMany (mappedBy = "usuarioPessoa")
 	private List<TelefoneUser> telefoneUser; 
 	
 	public List<TelefoneUser> getTelefoneUser() {
