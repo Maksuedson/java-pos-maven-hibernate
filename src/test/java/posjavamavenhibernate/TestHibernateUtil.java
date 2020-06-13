@@ -112,12 +112,44 @@ public class TestHibernateUtil {
 		System.out.println(somaId);
 	}
 	
-	@Test
+	
 	public void testQueryMediaId() {
 		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
 		
 		Double somaId = (Double) daoGeneric.getEntityManager().createQuery("select avg(u.id) from UsuarioPessoa u").getSingleResult();
 		System.out.println(somaId);
+	}
+	
+	
+	public void testNamedQuery() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		List<UsuarioPessoa> list = daoGeneric.getEntityManager().createNamedQuery("consultaTodos").getResultList();
+		
+		for (UsuarioPessoa usuarioPessoa : list) {
+			System.out.println(usuarioPessoa);
+		}
+	}
+	
+	
+	public void testNamedQueryNome() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		UsuarioPessoa pessoa = (UsuarioPessoa) daoGeneric.getEntityManager().createNamedQuery("buscaPorNome")
+				.setParameter("nome", "Amanda")
+				.getSingleResult();
+		System.out.println(pessoa);
+	
+	}
+	
+	public void testNamedQuery2() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		List<UsuarioPessoa> list = daoGeneric.getEntityManager().createNamedQuery("buscaPorNome")
+				.setParameter("nome", "Amanda")
+				.getResultList();
+		
+		for (UsuarioPessoa usuarioPessoa : list) {
+			System.out.println(usuarioPessoa);
+		}
 	}	
+	
 
 }
